@@ -10,8 +10,8 @@ namespace Pruebas.Domain.Models
         }
 
         public DbSet<Common.Models.Producto> Productos { get; set; }
-        public DbSet<Common.Models.Categoria> Categoria { get; set; }
-        public DbSet<Common.Models.Usuarios> Usuarios { get; set; }
-        public DbSet<Common.Models.UserType> UserType { get; set; }
+        public DbSet<Common.Models.Categoria> Categorias { get; set; }
+        public DbSet<Common.Models.Usuario> Usuarios { get; set; }
+        public DbSet<Common.Models.UserType> UserTypes { get; set; }
     }
 }

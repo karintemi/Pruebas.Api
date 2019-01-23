@@ -19,16 +19,16 @@ namespace Pruebas.Api.Controllers
         private DataContext db = new DataContext();
 
         // GET: api/Categorias
-        public IQueryable<Categoria> GetCategoria()
+        public IQueryable<Categoria> GetCategorias()
         {
-            return db.Categoria;
+            return db.Categorias;
         }
 
         // GET: api/Categorias/5
         [ResponseType(typeof(Categoria))]
         public async Task<IHttpActionResult> GetCategoria(int id)
         {
-            Categoria categoria = await db.Categoria.FindAsync(id);
+            Categoria categoria = await db.Categorias.FindAsync(id);
             if (categoria == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace Pruebas.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Categoria.Add(categoria);
+            db.Categorias.Add(categoria);
             await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = categoria.IdCategoria }, categoria);
@@ -91,13 +91,13 @@ namespace Pruebas.Api.Controllers
         [ResponseType(typeof(Categoria))]
         public async Task<IHttpActionResult> DeleteCategoria(int id)
         {
-            Categoria categoria = await db.Categoria.FindAsync(id);
+            Categoria categoria = await db.Categorias.FindAsync(id);
             if (categoria == null)
             {
                 return NotFound();
             }
 
-            db.Categoria.Remove(categoria);
+            db.Categorias.Remove(categoria);
             await db.SaveChangesAsync();
 
             return Ok(categoria);
@@ -114,7 +114,7 @@ namespace Pruebas.Api.Controllers
 
         private bool CategoriaExists(int id)
         {
-            return db.Categoria.Count(e => e.IdCategoria == id) > 0;
+            return db.Categorias.Count(e => e.IdCategoria == id) > 0;
         }
     }
 }

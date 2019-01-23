@@ -237,7 +237,6 @@
     <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
-    <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -346,6 +345,10 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Pruebas.Backend\Pruebas.Backend.csproj">
+      <Project>{66361fbe-acfb-4bf2-bed5-d41acc40379e}</Project>
+      <Name>Pruebas.Backend</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Pruebas.Common\Pruebas.Common.csproj">
       <Project>{970410af-7dab-467b-aa89-1897664f59b4}</Project>
       <Name>Pruebas.Common</Name>

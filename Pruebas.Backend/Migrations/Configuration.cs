@@ -11,7 +11,7 @@ namespace Pruebas.Backend.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "Pruebas.Backend.Models.LocalDataContext";
+            //ContextKey = "Pruebas.Backend.Models.LocalDataContext";
         }
 
         protected override void Seed(Pruebas.Backend.Models.LocalDataContext context)

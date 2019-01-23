@@ -1,6 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Pruebas.Backend.Models;
 using Pruebas.Common.Models;
@@ -25,18 +30,18 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = await db.Usuarios.FindAsync(id);
-            if (usuarios == null)
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(usuarios);
+            return View(usuario);
         }
 
         // GET: Usuarios/Create
         public ActionResult Create()
         {
-            ViewBag.UserTypeId = new SelectList(db.UserType, "UserTypeId", "Name");
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name");
             return View();
         }
 
@@ -45,17 +50,17 @@ namespace Pruebas.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ImagePath")] Usuarios usuarios)
+        public async Task<ActionResult> Create([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ImagePath")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Usuarios.Add(usuarios);
+                db.Usuarios.Add(usuario);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserTypeId = new SelectList(db.UserType, "UserTypeId", "Name", usuarios.UserTypeId);
-            return View(usuarios);
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name", usuario.UserTypeId);
+            return View(usuario);
         }
 
         // GET: Usuarios/Edit/5
@@ -65,13 +70,13 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = await db.Usuarios.FindAsync(id);
-            if (usuarios == null)
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserTypeId = new SelectList(db.UserType, "UserTypeId", "Name", usuarios.UserTypeId);
-            return View(usuarios);
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name", usuario.UserTypeId);
+            return View(usuario);
         }
 
         // POST: Usuarios/Edit/5
@@ -79,16 +84,16 @@ namespace Pruebas.Backend.Controllers
         // más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ImagePath")] Usuarios usuarios)
+        public async Task<ActionResult> Edit([Bind(Include = "UserId,FirstName,LastName,Email,Telephone,UserTypeId,ImagePath")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(usuarios).State = EntityState.Modified;
+                db.Entry(usuario).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserTypeId = new SelectList(db.UserType, "UserTypeId", "Name", usuarios.UserTypeId);
-            return View(usuarios);
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "UserTypeId", "Name", usuario.UserTypeId);
+            return View(usuario);
         }
 
         // GET: Usuarios/Delete/5
@@ -98,12 +103,12 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = await db.Usuarios.FindAsync(id);
-            if (usuarios == null)
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            if (usuario == null)
             {
                 return HttpNotFound();
             }
-            return View(usuarios);
+            return View(usuario);
         }
 
         // POST: Usuarios/Delete/5
@@ -111,8 +116,8 @@ namespace Pruebas.Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Usuarios usuarios = await db.Usuarios.FindAsync(id);
-            db.Usuarios.Remove(usuarios);
+            Usuario usuario = await db.Usuarios.FindAsync(id);
+            db.Usuarios.Remove(usuario);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

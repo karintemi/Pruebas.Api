@@ -1,6 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Pruebas.Backend.Models;
 using Pruebas.Common.Models;
@@ -14,7 +19,7 @@ namespace Pruebas.Backend.Controllers
         // GET: UserTypes
         public async Task<ActionResult> Index()
         {
-            return View(await db.UserType.ToListAsync());
+            return View(await db.UserTypes.ToListAsync());
         }
 
         // GET: UserTypes/Details/5
@@ -24,7 +29,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserType.FindAsync(id);
+            UserType userType = await db.UserTypes.FindAsync(id);
             if (userType == null)
             {
                 return HttpNotFound();
@@ -47,7 +52,7 @@ namespace Pruebas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UserType.Add(userType);
+                db.UserTypes.Add(userType);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -62,7 +67,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserType.FindAsync(id);
+            UserType userType = await db.UserTypes.FindAsync(id);
             if (userType == null)
             {
                 return HttpNotFound();
@@ -93,7 +98,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserType userType = await db.UserType.FindAsync(id);
+            UserType userType = await db.UserTypes.FindAsync(id);
             if (userType == null)
             {
                 return HttpNotFound();
@@ -106,8 +111,8 @@ namespace Pruebas.Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            UserType userType = await db.UserType.FindAsync(id);
-            db.UserType.Remove(userType);
+            UserType userType = await db.UserTypes.FindAsync(id);
+            db.UserTypes.Remove(userType);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

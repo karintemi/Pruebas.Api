@@ -1,6 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Pruebas.Backend.Models;
 using Pruebas.Common.Models;
@@ -36,7 +41,7 @@ namespace Pruebas.Backend.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion");
+            ViewBag.IdCategoria = new SelectList(db.Categorias, "IdCategoria", "Descripcion");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace Pruebas.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+            ViewBag.IdCategoria = new SelectList(db.Categorias, "IdCategoria", "Descripcion", producto.IdCategoria);
             return View(producto);
         }
 
@@ -70,7 +75,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+            ViewBag.IdCategoria = new SelectList(db.Categorias, "IdCategoria", "Descripcion", producto.IdCategoria);
             return View(producto);
         }
 
@@ -87,7 +92,7 @@ namespace Pruebas.Backend.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdCategoria = new SelectList(db.Categoria, "IdCategoria", "Descripcion", producto.IdCategoria);
+            ViewBag.IdCategoria = new SelectList(db.Categorias, "IdCategoria", "Descripcion", producto.IdCategoria);
             return View(producto);
         }
 

@@ -15,6 +15,6 @@
         public string Name { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Usuarios> Users { get; set; }
+        public virtual ICollection<Usuario> Users { get; set; }
     }
 }

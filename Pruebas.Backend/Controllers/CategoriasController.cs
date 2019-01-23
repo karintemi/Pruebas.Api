@@ -1,6 +1,11 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Pruebas.Backend.Models;
 using Pruebas.Common.Models;
@@ -14,7 +19,7 @@ namespace Pruebas.Backend.Controllers
         // GET: Categorias
         public async Task<ActionResult> Index()
         {
-            return View(await db.Categoria.ToListAsync());
+            return View(await db.Categorias.ToListAsync());
         }
 
         // GET: Categorias/Details/5
@@ -24,7 +29,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = await db.Categoria.FindAsync(id);
+            Categoria categoria = await db.Categorias.FindAsync(id);
             if (categoria == null)
             {
                 return HttpNotFound();
@@ -47,7 +52,7 @@ namespace Pruebas.Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Categoria.Add(categoria);
+                db.Categorias.Add(categoria);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
@@ -62,7 +67,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = await db.Categoria.FindAsync(id);
+            Categoria categoria = await db.Categorias.FindAsync(id);
             if (categoria == null)
             {
                 return HttpNotFound();
@@ -93,7 +98,7 @@ namespace Pruebas.Backend.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = await db.Categoria.FindAsync(id);
+            Categoria categoria = await db.Categorias.FindAsync(id);
             if (categoria == null)
             {
                 return HttpNotFound();
@@ -106,8 +111,8 @@ namespace Pruebas.Backend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Categoria categoria = await db.Categoria.FindAsync(id);
-            db.Categoria.Remove(categoria);
+            Categoria categoria = await db.Categorias.FindAsync(id);
+            db.Categorias.Remove(categoria);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

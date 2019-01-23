@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pruebas.Common.Models
 {
-    public class Usuarios
+    public class Usuario
     {
 
         [Key]
